@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Student_Notice_Board_Final.Models.Notice>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Notices</h1>
+
+@if (User.IsInRole("notice_admin"))
+{
+    <p>
+        <a class="btn btn-primary"  asp-action="Create">+ Add Notice</a>
+    </p>
+}
+
+@foreach (var item in Model)
+{
+
+
+    <div class="card border-dark">
+        <div class="card-header">
+           Notice
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p>@item.NoticeTitle</p>
+                <footer class="blockquote-footer">
+
+                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">View Notice</a>
+
+                    @if (User.IsInRole("notice_admin"))
+                    {
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-primary" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+
+                </footer>
+            </blockquote>
+        </div>
+    </div>
+
+
+
+}
+
